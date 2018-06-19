@@ -19,10 +19,42 @@ The items in this repo / page describe and follow the official curriculum and mo
 I think the best approach is to fork this repo as a starting point for your studies, and then use the markdown checklist to ensure you cover all of the expected masterial, etc. 
 
 Right now there are four primary sections to this document.
-- Where to Practice?
-- Important Tips and Tricks
 - Checklist of Curriculum Progress
+- Where to Practice?
+- Some Important Tips and Tricks ordered by curriculum
 - List of resources ordered by curriculum (mostly K8s.io) to study
+
+# Current Progress
+The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts is kind of vague, but the others are defined well enough that it is easy to prepare for with hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
+
+- [x] Core Concepts - 13%
+  - [x] API Primitives
+  - [x] Create and Configure Basic Pods
+- [ ] Configuration - 18%
+  - [x] Understand ConfigMaps
+  - [x] Understand SecurityContexts
+  - [x] Define App Resource Requirements
+  - [ ] Create and Consume Secrets
+  - [x] Understand Service Accounts
+- [ ] Multi-Container Pods - 10%
+  - [ ] Design Patterns: Ambassador, Adapter, Sidecar
+    - [ ] - Sidecar Pattern
+    - [ ] - Init Containers
+- [x] Pod Design - 20%
+  - [x] Using Labels, Selectors, and Annotations
+  - [x] Understand Deployments and Rolling Updates
+  - [x] Understand Deployment Rollbacks
+  - [x] Understand Jobs and CronJobs
+- [ ] - State Persistence - 8%
+  - [ ] - Understand PVCs for Storage
+- [ ] Observability - 18%
+  - [x] Liveness and Readiness Probes
+  - [x] Understand Container Logging
+  - [ ] Understand Monitoring Application in Kubernetes
+  - [x] Understand Debugging in Kubernetes
+- [x] Services and Networking - 13%
+  - [x] Understand Services
+  - [x] Basic Network Policies
 
 ## Where to Practice?
 This particular items was difficult for me as I didn't have a (current) k8s cluster to use at work. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches for an inexpensive k8s environment. For example, building clusters using K8s The Hard way on gcloud (and AWS), building a raspberry pi cluster I could take to work, using kubeadm / kops, etc. 
@@ -58,12 +90,13 @@ The core concepts cover how the API concepts and its primitives / resources. It 
 
 ### Using the RUN command for Pods
 The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam. 
+
 The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by defauilt the run creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
 ```
 $kubectl run nginx --image=nginx   (deployment)
 $kubectl run nginx --image=nginx --restart=Never   (pod)
 $kubectl run busybox --image=busybox --restart=OnFailure   (job)
-$kubectl run busybox --image=busybox --schedule="*/1 * * * * *"  --restart=OnFailure (cronJob)
+$kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure (cronJob)
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
 
@@ -71,7 +104,7 @@ The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job re
 Configuration pertains to how variable data is provided to your applications executing within k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
 
 ### Config Maps / Environment Variables
-This exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
+The exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
 ```
 $ kubectl create configmap app-config --from-literal=key123=value123
 ```
@@ -105,10 +138,47 @@ spec:
 ### App Resource Requirements
 Defining the memory and cpu requirements for your containers is something that should always be done. It allows for more efficient scheduling and better overall hygiene for your application environment. Again, covered well in the tasks section below, but here is a brief snippet for the standard mem/cpu specification.
 ```
-
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: demo
+    image: polinux/stress
+    resources:
+      limits:
+        memory: "200Mi"
+      requests:
+        memory: "100Mi"
 ```
-  - [ ] Create and Consume Secrets
-  - [x] Understand Service Accounts
+### Secrets
+To quickly generate secrets, use the --from-literal flag like this:
+```
+$kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
+```
+This produces the following secret that can then be consumed by your containers. The value is encoded. 
+```
+apiVersion: v1
+data:
+  foo: YmFy
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: my-secret
+```
+### Service Accounts
+When pods are created by K8s they are provided an identify via the service account. In most cases, pods use the default service account, but it can be specified directly. 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  serviceAccountName: build-robot
+  ...
+```
+
+
+
 
 
 ### 'Exposing' Ports for PODS
@@ -199,37 +269,10 @@ metadata:
   name: my-secret
 ```
 
-# Current Progress
-The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts is kind of vague, but the others are defined well enough that it is easy to prepare for with hands-on work through the tasks offered at kubernetes.io. 
 
-- [x] Core Concepts - 13%
-  - [x] API Primitives
-  - [x] Create and Configure Basic Pods
-- [ ] Configuration - 18%
-  - [x] Understand ConfigMaps
-  - [x] Understand SecurityContexts
-  - [x] Define App Resource Requirements
-  - [ ] Create and Consume Secrets
-  - [x] Understand Service Accounts
-- [ ] Multi-Container Pods - 10%
-  - [ ] Design Patterns: Ambassador, Adapter, Sidecar
-    - [ ] - Sidecar Pattern
-    - [ ] - Init Containers
-- [x] Pod Design - 20%
-  - [x] Using Labels, Selectors, and Annotations
-  - [x] Understand Deployments and Rolling Updates
-  - [x] Understand Deployment Rollbacks
-  - [x] Understand Jobs and CronJobs
-- [ ] - State Persistence - 8%
-  - [ ] - Understand PVCs for Storage
-- [ ] Observability - 18%
-  - [x] Liveness and Readiness Probes
-  - [x] Understand Container Logging
-  - [ ] Understand Monitoring Application in Kubernetes
-  - [x] Understand Debugging in Kubernetes
-- [x] Services and Networking - 13%
-  - [x] Understand Services
-  - [x] Basic Network Policies
+
+# TASKS from Kubernetes.io
+The following are primarily links to 'tasks' section of the kubernetes.io documentation. These are very useful to use a labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
 
 ## Core Concepts and Kubectl
 
