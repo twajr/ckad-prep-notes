@@ -25,6 +25,21 @@ Right now there are four primary sections to this document.
 - List of resources (mostly K8s.io) to study
 
 ## Where to Practice?
+This particular items was difficult for me. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches. For example, building clusters using K8s The Hard way on gcloud (and AWS), building a raspberry pi cluster I could take to work, using kubeadm / kops, etc. 
+
+In my opinion, and all that is required to pass this test, is to just setup a gcloud account, and use a two-node GKE cluster for studying. Heck, you can even use the nice google cloud shell and not evey leave your browser. 
+
+Here are my commands used to create an initial two-node cluster for studying. I keep these here just so I can fire up and destroy a cluster for a few hours each day for study. Notice that you can tailor the cluster version to match the k8s version for the exam.
+```
+gcloud config set compute/zone us-central1-a
+gcloud config set compute/region us-central1
+gcloud container clusters create my-cluster --cluster-version=1.10.2-gke.3 \
+     --image-type=ubuntu --num-nodes=2
+```
+No need to keep the cluster around when not studying
+```
+gcloud container clusters delete my-cluster
+```
 
 
 ## IMPORTANT TIPS
@@ -157,21 +172,21 @@ The list below is based on the curriculum v1.0
   - [ ] Design Patterns: Ambassador, Adapter, Sidecar
     - [ ] - Sidecar Pattern
     - [ ] - Init Containers
-- [ ] Pod Design - 20%
-  - [ ] Using Labels, Selectors, and Annotations
-  - [ ] Understand Deployments and Rolling Updates
-  - [ ] Understand Deployment Rollbacks
-  - [ ] Understand Jobs and CronJobs
+- [x] Pod Design - 20%
+  - [x] Using Labels, Selectors, and Annotations
+  - [x] Understand Deployments and Rolling Updates
+  - [x] Understand Deployment Rollbacks
+  - [x] Understand Jobs and CronJobs
 - [ ] - State Persistence - 8%
   - [ ] - Understand PVCs for Storage
 - [ ] Observability - 18%
-  - [ ] Liveness and Readiness Probes
+  - [x] Liveness and Readiness Probes
   - [x] Understand Container Logging
   - [ ] Understand Monitoring Application in Kubernetes
   - [x] Understand Debugging in Kubernetes
-- [ ] Services and Networking - 13%
+- [x] Services and Networking - 13%
   - [x] Understand Services
-  - [ ] Basic Network Policies
+  - [x] Basic Network Policies
 
 ## Core Concepts and Kubectl
 
