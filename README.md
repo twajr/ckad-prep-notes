@@ -1,7 +1,7 @@
 # ckad-prep-notes
 List of resources and notes for passing the Certified Kubernetes Application Developer (CKAD) exam. Official links below. 
 
-- [Kubernetes Certified Application Developer - Main](https://www.cncf.io/certification/ckad/)
+- [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
 - [CNCF Official CKAD Exam Tips](https://www2.thelinuxfoundation.org/ckad-tips)
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
 
@@ -43,20 +43,24 @@ gcloud container clusters delete my-cluster
 
 
 ## IMPORTANT TIPS
-The exam is about speed and efficiency. If you have to spend lots of time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management.
+The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management.
 
-### Setting Default Namespace
-You have to create various contexts to move between namespaces. It's just easier to always use the namespace flag (-n) when running commands, IMO.
+### CORE CONCEPTS
+The core concepts cover how the API concepts and its primitives / resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is used from kubectl. To me, this is embodied in the kubectl RUN command. IMO, Understanding pods is the primary core concept. 
 
-### Using the RUN command
-The resource created from a particular RUN command is based on its 'generator'. For example, by defauilt the run creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on the ---restart flag. 
+### Using the RUN command for Pods
+The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam. 
+The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by defauilt the run creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
 ```
 $kubectl run nginx --image=nginx   (deployment)
 $kubectl run nginx --image=nginx --restart=Never   (pod)
 $kubectl run busybox --image=busybox --restart=OnFailure   (job)
-$kubectl run busybox --image=busybox --schedule="*/1 * * * * *"  --restart=OnFailure
+$kubectl run busybox --image=busybox --schedule="*/1 * * * * *"  --restart=OnFailure (cronJob)
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
+
+
+## Misc Tips
 ### Extracting yaml from running resource
 Use the --export and -o yaml flags to export the basic yaml from an existing resource:
 ```
@@ -67,7 +71,7 @@ The --dry-run flag can be used with the kubectl run and create commands. It prov
 ```
 kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
 ```
-Also above, the --from-literal flag is useful for things like config maps and secrets for their basic cases. The above output:
+Also the --from-literal flag is useful for things like config maps and secrets for their basic cases. The above output:
 ```
 apiVersion: v1
 data:
@@ -77,9 +81,8 @@ metadata:
   creationTimestamp: null
   name: my-secret
 ```
-## OTHER Key Items
 ### 'Exposing' Ports for PODS
-Pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
+By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
 ```
 spec:
     containers:
@@ -138,14 +141,17 @@ Well described here:
 - [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### Container Metrics
+Container metrics require that heapster  
 ```
 $ kubectl top pod
 ```
 ### Config Maps / Environment Variables
-Command below to create a simple config map with a key/value pair.
+This exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
 ```
 $ kubectl create configmap app-config --from-literal=key123=value123
 ```
+There are many 
+
 Mapping all keys to a pod's env is tricky:
 ```
 spec:
