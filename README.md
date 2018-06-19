@@ -29,19 +29,26 @@ This particular items was difficult for me. As I was initially studying for the 
 
 In my opinion, and all that is required to pass this test, is to just setup a gcloud account, and use a two-node GKE cluster for studying. Heck, you can even use the nice google cloud shell and not evey leave your browser. 
 
-Here are my commands used to create an initial two-node cluster for studying. I keep these here just so I can fire up and destroy a cluster for a few hours each day for study. Notice that you can tailor the cluster version to match the k8s version for the exam.
+Here are commands used to create an initial two-node cluster for studying. I keep these here just so I can fire up and destroy a cluster for a few hours each day for study. Notice that you can tailor the cluster version to match the k8s version for the exam.
 ```
 gcloud config set compute/zone us-central1-a
 gcloud config set compute/region us-central1
 gcloud container clusters create my-cluster --cluster-version=1.10.2-gke.3 \
      --image-type=ubuntu --num-nodes=2
 ```
+The result:
+```
+NAME          LOCATION       MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
+my-cluster  us-central1-a  1.10.2-gke.3    35.232.253.6  n1-standard-1  1.10.2-gke.3  2          RUNNING
+cloudshell:~$ kubectl get nodes
+NAME                                          STATUS    ROLES     AGE       VERSION
+gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       v1.10.2-gke.3
+gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       v1.10.2-gke.3
+```
 No need to keep the cluster around when not studying
 ```
 gcloud container clusters delete my-cluster
 ```
-
-
 ## IMPORTANT TIPS
 The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management.
 
