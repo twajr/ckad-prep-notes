@@ -4,7 +4,7 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 - [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
 - [CNCF Official CKAD Exam Tips](https://www2.thelinuxfoundation.org/ckad-tips)
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
-
+- [VIM Cheatsheet - You need to know VIM pretty well](https://devhints.io/vim)
 
 ## Current Kubernetes Version
 Version: 1.10.2
@@ -38,10 +38,11 @@ gcloud container clusters create my-cluster --cluster-version=1.10.2-gke.3 \
 ```
 The result:
 ```
-NAME          LOCATION       MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
+NAME        LOCATION       MASTER_VERSION  MASTER_IP     MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
 my-cluster  us-central1-a  1.10.2-gke.3    35.232.253.6  n1-standard-1  1.10.2-gke.3  2          RUNNING
+
 cloudshell:~$ kubectl get nodes
-NAME                                          STATUS    ROLES     AGE       VERSION
+NAME                                        STATUS    ROLES     AGE       VERSION
 gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       v1.10.2-gke.3
 gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       v1.10.2-gke.3
 ```
@@ -49,8 +50,8 @@ No need to keep the cluster around when not studying
 ```
 gcloud container clusters delete my-cluster
 ```
-## IMPORTANT TIPS
-The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management.
+## Important Tips
+The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. 
 
 ### CORE CONCEPTS
 The core concepts cover how the API concepts and its primitives / resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is used from kubectl. To me, this is embodied in the kubectl RUN command. IMO, Understanding pods is the primary core concept. 
@@ -66,28 +67,6 @@ $kubectl run busybox --image=busybox --schedule="*/1 * * * * *"  --restart=OnFai
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
 
-
-## Misc Tips
-### Extracting yaml from running resource
-Use the --export and -o yaml flags to export the basic yaml from an existing resource:
-```
-kubectl get deploy busybox --export -o yaml > exported.yaml
-```
-### The --dry-run flag
-The --dry-run flag can be used with the kubectl run and create commands. It provides a nice template to start your declarative yaml config files. Below is an example for creating a basic secret yaml. 
-```
-kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
-```
-Also the --from-literal flag is useful for things like config maps and secrets for their basic cases. The above output:
-```
-apiVersion: v1
-data:
-  foo: YmFy
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: my-secret
-```
 ### 'Exposing' Ports for PODS
 By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
 ```
@@ -169,6 +148,30 @@ spec:
     image: nginx
     name: nginx-x
 ```
+
+
+## Misc Tips
+### Extracting yaml from running resource
+Use the --export and -o yaml flags to export the basic yaml from an existing resource:
+```
+kubectl get deploy busybox --export -o yaml > exported.yaml
+```
+### The --dry-run flag
+The --dry-run flag can be used with the kubectl run and create commands. It provides a nice template to start your declarative yaml config files. Below is an example for creating a basic secret yaml. 
+```
+kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
+```
+Also the --from-literal flag is useful for things like config maps and secrets for their basic cases. The above output:
+```
+apiVersion: v1
+data:
+  foo: YmFy
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: my-secret
+```
+
 # Current Progress
 The list below is based on the curriculum v1.0
 
