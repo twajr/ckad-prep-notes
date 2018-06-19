@@ -22,10 +22,10 @@ Right now there are four primary sections to this document.
 - Where to Practice?
 - Important Tips and Tricks
 - Checklist of Curriculum Progress
-- List of resources (mostly K8s.io) to study
+- List of resources ordered by curriculum (mostly K8s.io) to study
 
 ## Where to Practice?
-This particular items was difficult for me. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches. For example, building clusters using K8s The Hard way on gcloud (and AWS), building a raspberry pi cluster I could take to work, using kubeadm / kops, etc. 
+This particular items was difficult for me as I didn't have a (current) k8s cluster to use at work. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches for an inexpensive k8s environment. For example, building clusters using K8s The Hard way on gcloud (and AWS), building a raspberry pi cluster I could take to work, using kubeadm / kops, etc. 
 
 In my opinion, and all that is required to pass this test, is to just setup a gcloud account, and use a two-node GKE cluster for studying. Heck, you can even use the nice google cloud shell and not evey leave your browser. 
 
@@ -66,6 +66,50 @@ $kubectl run busybox --image=busybox --restart=OnFailure   (job)
 $kubectl run busybox --image=busybox --schedule="*/1 * * * * *"  --restart=OnFailure (cronJob)
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
+
+### CONFIGURATION
+Configuration pertains to how variable data is provided to your applications executing within k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
+
+### Config Maps / Environment Variables
+This exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
+```
+$ kubectl create configmap app-config --from-literal=key123=value123
+```
+There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below. 
+```
+spec:
+  containers:
+  - envFrom:              (create env variables for each key in config map)
+    - configMapRef:
+        name: app-config  (name of your config map)
+    image: nginx
+    name: nginx
+```
+### Security Contexts
+Security contexts can be applied at either the pod or container level. Of course pod-level contexts apply to all containers within that pod. There are several ways of defining privileges and access controls with these contexts. 
+
+These concepts are covered well in the tasks section below, but here is a basic RunAs example from the doc that shows both pod and container contexts being used. 
+```
+apiVersion: v1
+kind: Pod
+spec:
+  securityContext:
+    runAsUser: 1000
+  containers:
+  - name: sec-ctx-demo
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      runAsUser: 2000
+      allowPrivilegeEscalation: false
+```
+### App Resource Requirements
+Defining the memory and cpu requirements for your containers is something that should always be done. It allows for more efficient scheduling and better overall hygiene for your application environment. Again, covered well in the tasks section below, but here is a brief snippet for the standard mem/cpu specification.
+```
+
+```
+  - [ ] Create and Consume Secrets
+  - [x] Understand Service Accounts
+
 
 ### 'Exposing' Ports for PODS
 By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
@@ -131,23 +175,6 @@ Container metrics require that heapster
 ```
 $ kubectl top pod
 ```
-### Config Maps / Environment Variables
-This exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
-```
-$ kubectl create configmap app-config --from-literal=key123=value123
-```
-There are many 
-
-Mapping all keys to a pod's env is tricky:
-```
-spec:
-  containers:
-  - envFrom:
-    - configMapRef:
-        name: app-map
-    image: nginx
-    name: nginx-x
-```
 
 
 ## Misc Tips
@@ -173,7 +200,7 @@ metadata:
 ```
 
 # Current Progress
-The list below is based on the curriculum v1.0
+The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts is kind of vague, but the others are defined well enough that it is easy to prepare for with hands-on work through the tasks offered at kubernetes.io. 
 
 - [x] Core Concepts - 13%
   - [x] API Primitives
