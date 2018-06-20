@@ -235,20 +235,18 @@ spec:
 ## STATE PERSISTENCE
 This is still one of my weaknesses and the whole PV creation is high dependent on the underlying cloud or file storage technique used. For now, the links provided later in the persistence tasks are best for studying this. 
 
-### Deployments, Rollouts, Roll-Backs...
-Well described here:
-- [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
-
 ## OBSERVABILITY
 This part of the curriculum covers the logging, debugging, and metrics of your running applications. 
 
 ### Container Metrics
 Container metrics require that heapster be running, and it is pretty standard on clusters now. 
 ```
-$ kubectl top pod
+$ kubectl top pod -n my-namespace
+$ kubectl top node -n my-namespace
 ```
 
 ## SERVICES and NETWORKING
+Services are pretty straight forward, but there are lots of networking details in a k8s cluster. The curriculum only mentions network policies so you should understand that particular aspect of networking in good detail. 
 
 ### 'Exposing' Ports for PODS
 By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
@@ -296,14 +294,14 @@ metadata:
 ```
 
 # TASKS from Kubernetes.io
-The following are primarily links to 'tasks' section of the kubernetes.io documentation. These are very useful to use as labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
+The following are primarily links to either the 'concepts' or 'tasks' section of the kubernetes.io documentation. The 'task' items are very useful to use as labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
 
 ## Core Concepts and Kubectl
 
-- [Accessing Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
-- [Accessing Cluster with API](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/)
-- [Port Forwarding](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
-- [Shell to Running Container (exec)](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/)
+- [Tasks -> Accessing Multiple Clusters](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/)
+- [Tasks -> Accessing Cluster with API](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/)
+- [Tasks -> Port Forwarding](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+- [Tasks -> Shell to Running Container (exec)](https://kubernetes.io/docs/tasks/debug-application-cluster/get-shell-running-container/)
 
 ## Configuration
 
@@ -322,9 +320,10 @@ The following are primarily links to 'tasks' section of the kubernetes.io docume
 - [Need more content here with the different mult-container approaches with tasks]
 
 ## Pod Design
-
+- [Concepts -> Assign Pods to Nodes - Selectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
+- [Labels and Selectors Overview](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 - [Tasks -> ReplicaSet Rolling Updates](https://kubernetes.io/docs/tasks/run-application/rolling-update-replication-controller/)
-- [Deployments, Rollouts, and Rollbacks Overview](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [Concepts -> Deployments, Rollouts, and Rollbacks](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### CRON
 - [Tasks -> Automated Tasks with Cron Jobs](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/)
@@ -343,7 +342,9 @@ The following are primarily links to 'tasks' section of the kubernetes.io docume
 - [Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
 - [Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
 - [Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
+- [Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
 
 ## Services and Networking
 
+- [Connecting Apps with Services Overview](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)
 - [Declare Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
