@@ -11,11 +11,11 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 Version: 1.10.2
 
 # Overview
-The exam is 100% hands on using the innotvative exams (www.examslocal.com) product. The platform basically disables copy/paste so the exam requires an excellent understanding the quickest way to accomplish tasks on Kubernetes via the command line (kubectl). I'm sure they use this approach to the exam as it pretty much precludes any 'cheating'. You either know the material and can very quickly implement it or not.  
+The exam is 100% hands on using the innovative exams (www.examslocal.com) product. The CKAD exam requires an excellent understanding of K8s along with how to efficiently use kubectl to accomplish various tasks on Kubernetes. I'm sure they use this exam approach as it pretty much precludes any form of cheating. You either know the material and can very quickly implement it or not.  
 
-You will be given a list of 'tasks' to accomplish on one of four kubernetes clusters (these are described in the official exam tips above). The exam is 'open book' but only with the content available at kubernetes.io. You will have one tab for the exam content and one additional tab for kubernetes.io. However, don't expect that you can just research questions during the exam, as there will be very little time for 'learning' a k8s concept at exam time. It's there to help with YAML syntax detail only, IMO.
+You will be given a list of 'tasks' to accomplish on one of four kubernetes clusters (these are described in the official exam tips above). The exam is 'open book' but only with the content available at kubernetes.io. You will have one tab for the exam content and one additional tab for kubernetes.io. However, don't expect that you can just research questions during the exam, as there will be very little time for 'learning' a specific k8s concept at exam time. It's there to help with YAML syntax detail only, IMO.
 
-The items in this particular repo / page describe and follow the official curriculum and mostly point back to the various documents at Kubernetes.io.  There is a lot of content on k8s and a lot of it does not pertain to the CKAD exam, so I've pulled out the sections that are pertinent based on the curriculum. There is a nice checklist below that you can update once you think you have mastered a particular topic. 
+The items in this particular repo / page describe and follow the official curriculum and point back to the various documents at Kubernetes.io.  There is a lot of content on k8s and a lot of it does not pertain to the CKAD exam, so I've pulled out the sections that are pertinent based on the curriculum. There is a nice checklist below that you can update once you think you have mastered a particular topic. 
 
 I think the best approach is to fork this repo as a starting point for your studies, and then use the markdown checklist to ensure you cover all of the expected masterial, etc. 
 
@@ -27,7 +27,7 @@ Right now there are five primary sections to this document.
 - List of Resources Ordered by Curriculum (mostly K8s.io) for Study
 
 # Current Progress
-The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts is kind of vague, but the others are defined well enough that it is easy to prepare for with hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
+The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts piece is kind of vague, but the others are defined well enough that it is easy to prepare for with a hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
 
 - [x] __Core Concepts - 13%__
   - [x] API Primitives
@@ -85,10 +85,10 @@ No need to keep the cluster around when not studying, so:
 gcloud container clusters delete my-cluster
 ```
 # Detailed Review (with Tips)
-The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. This section is best used to provide a quick overview of the curriculum along with various commands that will be needed on a hands-on type exam. 
+The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. This section is best used to provide a quick overview of the curriculum along with the needed kubectl commands for a hands-on exam. 
 
 ## CORE CONCEPTS
-The core concepts cover how the API concepts and its primitives / resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is used from kubectl. To me, this is embodied in the kubectl RUN command. IMO, Understanding pods is the primary core concept. 
+The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is managed with kubectl. To me, this is embodied in the kubectl RUN command. 
 
 ### Using the RUN command for Pods
 The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam. 
@@ -103,10 +103,10 @@ $ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailur
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
 
 ## CONFIGURATION
-Configuration pertains to how variable data is provided to your applications executing within k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
+Configuration covers how run-time data is provided to your applications executing within k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
 
 ### Config Maps / Environment Variables
-The exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic confic map with a key value pair, see below. 
+The exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic config map with a key value pair, see below. 
 ```
 $ kubectl create configmap app-config --from-literal=key123=value123
 ```
@@ -255,7 +255,7 @@ Services provide a persistent endpoint for a logical set of pods. This endpoint 
 
 
 ### 'Exposing' Ports for PODS
-By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the PORT a container will use. See below:
+By default pods can all inter-communicate via their internal IP address and port. Services are needed to expose services OUTSIDE of the cluster. So, it's important to understand the basic container spec for specifying the port a container will use. The example below declares the port as well as an environment variable describing same.
 ```
 spec:
     containers:
@@ -288,7 +288,8 @@ The --dry-run flag can be used with the kubectl run and create commands. It prov
 ```
 kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
 ```
-Also the --from-literal flag is useful for things like config maps and secrets for their basic cases. The above output:
+### The --from-literal flag
+As shown above, the --from-literal flag is useful for things like config maps and secrets for the basic cases. 
 ```
 apiVersion: v1
 data:
@@ -298,7 +299,6 @@ metadata:
   creationTimestamp: null
   name: my-secret
 ```
-
 # TASKS from Kubernetes.io
 The following are primarily links to either the 'concepts' or 'tasks' section of the kubernetes.io documentation. The 'task' items are very useful to use as labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
 
