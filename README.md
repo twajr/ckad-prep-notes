@@ -188,36 +188,50 @@ This particular section needs additional detail as these concepts are not covere
 
 - One or more containers running within a pod to allow access to application running within the container (Monitoring container); These are called as adapter containers- 
 
-### CronJobs
-Job vs CronJob -> A job runs a pod to a number of successful completions. Cron jobs manage jobs that run at specified intervals and/or repeatedly at a specific point in time. 
+## POD DESIGN
+The Pod design section mostly covers deployments, rolling updates, and rollbacks (and jobs). These are all covered well in the tasks section later in this document. The primary trick here is to really understand the basic commands for updating a deployment which causes a new replicaSet to be created for the rollout. Both replica sets exist as the rollout continues and completes. 
+
+### Deployment Updates
+Below is a quick example of creating a deployment and then updating its image. This will force a rolling deployment to start. 
 ```
-$ kubectl run x  --image=busybox --schedule="*/1 * * * *" --restart=OnFailure --dry-run -o yaml
+$kubectl run nginx --image=nginx  --replicas=3
+```
+Okay, not force a rolling update by updating its image.
+```
+$kubectl set image deploy/nginx nginx=nginx:1.9.1
+```
+Now you can check the status of the roll out.
+```
+$ kubectl rollout status deploY/nginx 
+```
+Now, if you want to roll it back:
+```
+$ kubectl rollout undo deploy/nginx
+```
+This is all describe well on kubernetes.io by searching for 'deployment' and reading the overview there. 
+
+### Jobs and CronJobs
+Job vs CronJob -> A job runs a pod to a number of successful completions. Cron jobs manage jobs that run at specified intervals and/or repeatedly at a specific point in time, thus they have the 'schedule' aspect. The below demonstrates quickly creating a cronjob and then a quick edit to add a command, etc. 
+```
+$ kubectl run crontest  --image=busybox --schedule="*/1 * * * *" --restart=OnFailure --dry-run -o yaml
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   labels:
-    run: x
-  name: x
+    run: crontest
+  name: crontest
 spec:
-  startingDeadlineSeconds: 20
-  concurrencyPolicy: Allow
+  schedule: '*/1 * * * *'
   jobTemplate:
-    metadata:
-      creationTimestamp: null
     spec:
       template:
-        metadata:
-          creationTimestamp: null
-          labels:
-            run: x
         spec:
           containers:
           - image: busybox
-            name: x
-            resources: {}
-            command: ["date"]
+            name: crontest
+            command: ["date; echo Hello"]
           restartPolicy: OnFailure
-  schedule: '*/1 * * * *'
+
 ```
 ### Deployments, Rollouts, Roll-Backs...
 Well described here:
