@@ -23,38 +23,38 @@ Right now there are five primary sections to this document.
 - This Overview
 - A Checklist of Curriculum Progress
 - Where to Practice?
-- Some Important Tips and Review Ordered by Curriculum
+- Detailed Review (with Tips) Ordered by Curriculum
 - List of Resources Ordered by Curriculum (mostly K8s.io) for Study
 
 # Current Progress
 The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts is kind of vague, but the others are defined well enough that it is easy to prepare for with hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
 
-- [x] Core Concepts - 13%
+- [x] __Core Concepts - 13%__
   - [x] API Primitives
   - [x] Create and Configure Basic Pods
-- [ ] Configuration - 18%
+- [ ] __Configuration - 18%__
   - [x] Understand ConfigMaps
   - [x] Understand SecurityContexts
   - [x] Define App Resource Requirements
   - [ ] Create and Consume Secrets
   - [x] Understand Service Accounts
-- [ ] Multi-Container Pods - 10%
+- [ ] __Multi-Container Pods - 10%__
   - [ ] Design Patterns: Ambassador, Adapter, Sidecar
     - [ ] - Sidecar Pattern
     - [ ] - Init Containers
-- [x] Pod Design - 20%
+- [x] __Pod Design - 20%__
   - [x] Using Labels, Selectors, and Annotations
   - [x] Understand Deployments and Rolling Updates
   - [x] Understand Deployment Rollbacks
   - [x] Understand Jobs and CronJobs
-- [ ] - State Persistence - 8%
+- [ ] - __State Persistence - 8%__
   - [ ] - Understand PVCs for Storage
-- [ ] Observability - 18%
+- [ ] __Observability - 18%__
   - [x] Liveness and Readiness Probes
   - [x] Understand Container Logging
   - [ ] Understand Monitoring Application in Kubernetes
   - [x] Understand Debugging in Kubernetes
-- [x] Services and Networking - 13%
+- [x] __Services and Networking - 13%__
   - [x] Understand Services
   - [x] Basic Network Policies
 
@@ -84,8 +84,8 @@ No need to keep the cluster around when not studying, so:
 ```
 gcloud container clusters delete my-cluster
 ```
-# Important Review (with Tips)
-The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. 
+# Detailed Review (with Tips)
+The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. This section is best used to provide a quick overview of the curriculum along with various commands that will be needed on a hands-on type exam. 
 
 ## CORE CONCEPTS
 The core concepts cover how the API concepts and its primitives / resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is used from kubectl. To me, this is embodied in the kubectl RUN command. IMO, Understanding pods is the primary core concept. 
@@ -296,7 +296,7 @@ metadata:
 ```
 
 # TASKS from Kubernetes.io
-The following are primarily links to 'tasks' section of the kubernetes.io documentation. These are very useful to use a labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
+The following are primarily links to 'tasks' section of the kubernetes.io documentation. These are very useful to use as labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
 
 ## Core Concepts and Kubectl
 
