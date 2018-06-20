@@ -179,13 +179,15 @@ spec:
   ...
 ```
 ## MULTI-CONTAINER PODS
-This particular section needs additional detail as these concepts are not covered that well via the tasks provided at kubernetes.io. 
+This particular section needs additional detail as these concepts are not covered that well via the tasks provided at kubernetes.io. Actually, the best coverage (for sidecars) is in the concepts section under logging architecture. 
 
 - One or more containers running within a pod for enhancing the main container functionality (logger container, git synchronizer container); These are sidecar container
 
 - One or more containers running within a pod for accessing external applications/servers (Redis cluster, memcache cluster); These are called ambassador container
 
 - One or more containers running within a pod to allow access to application running within the container (Monitoring container); These are called as adapter containers- 
+
+[Concepts -> Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
 ## POD DESIGN
 The Pod design section mostly covers deployments, rolling updates, and rollbacks (and jobs). These are all covered well in the tasks section later in this document. The primary trick here is to really understand the basic commands for updating a deployment which causes a new replicaSet to be created for the rollout. Both replica sets exist as the rollout continues and completes. 
@@ -317,11 +319,11 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 ## Multi-Container Pods
 
 - [Tasks -> Init Containers](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/)
-- [Need more content here with the different mult-container approaches with tasks]
+- [Concepts -> Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
 ## Pod Design
 - [Concepts -> Assign Pods to Nodes - Selectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
-- [Labels and Selectors Overview](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+- [Concepts -> Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 - [Tasks -> ReplicaSet Rolling Updates](https://kubernetes.io/docs/tasks/run-application/rolling-update-replication-controller/)
 - [Concepts -> Deployments, Rollouts, and Rollbacks](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
@@ -332,19 +334,19 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 - [Tasks -> Fine Parallel Processsing with a Work Queue](https://kubernetes.io/docs/tasks/job/fine-parallel-processing-work-queue/)
 
 ## State Persistence
-
+- [Concepts -> Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 - [Tasks -> Configuring PVCs](https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/)
 
 ## Observability
-- [App Introspection and Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/)
+- [Tasks -> App Introspection and Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/)
 - [Tasks - Liveness and Readiness Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)
 - [Tasks -> Debugging Pods](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/)
-- [Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
-- [Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
-- [Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
-- [Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
+- [Tasks -> Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
+- [Tasks -> Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
+- [Tasks -> Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
+- [Tasks -> Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
 
 ## Services and Networking
 
-- [Connecting Apps with Services Overview](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)
-- [Declare Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
+- [Concepts -> Connecting Apps with Services](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)
+- [Tasks -> Declare Network Policy](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/)
