@@ -95,10 +95,10 @@ The RUN command allows quick creation of the various high-level execution resour
 
 The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by defauilt the run creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
 ```
-$kubectl run nginx --image=nginx   (deployment)
-$kubectl run nginx --image=nginx --restart=Never   (pod)
-$kubectl run busybox --image=busybox --restart=OnFailure   (job)
-$kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure (cronJob)
+$ kubectl run nginx --image=nginx   (deployment)
+$ kubectl run nginx --image=nginx --restart=Never   (pod)
+$ kubectl run busybox --image=busybox --restart=OnFailure   (job)
+$ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure (cronJob)
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource. 
 
@@ -155,7 +155,7 @@ spec:
 ### Secrets
 To quickly generate secrets, use the --from-literal flag like this:
 ```
-$kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
+$ kubectl create secret generic my-secret --from-literal=foo=bar -o yaml --dry-run > my-secret.yaml
 ```
 This produces the following secret that can then be consumed by your containers. The value is encoded. 
 ```
@@ -178,7 +178,6 @@ spec:
   serviceAccountName: build-robot
   ...
 ```
-
 ## MULTI-CONTAINER PODS
 This particular section needs additional detail as these concepts are not covered that well via the tasks provided at kubernetes.io. 
 
@@ -192,23 +191,23 @@ This particular section needs additional detail as these concepts are not covere
 The Pod design section mostly covers deployments, rolling updates, and rollbacks (and jobs). These are all covered well in the tasks section later in this document. The primary trick here is to really understand the basic commands for updating a deployment which causes a new replicaSet to be created for the rollout. Both replica sets exist as the rollout continues and completes. 
 
 ### Deployment Updates
-Below is a quick example of creating a deployment and then updating its image. This will force a rolling deployment to start. 
+Below is a quick example of creating a deployment and then updating its image. This will force a rolling deployment to start. You can then roll it back. 
 ```
-$kubectl run nginx --image=nginx  --replicas=3
+$ kubectl run nginx --image=nginx  --replicas=3
 ```
 Okay, not force a rolling update by updating its image.
 ```
-$kubectl set image deploy/nginx nginx=nginx:1.9.1
+$ kubectl set image deploy/nginx nginx=nginx:1.9.1
 ```
 Now you can check the status of the roll out.
 ```
-$ kubectl rollout status deploY/nginx 
+$ kubectl rollout status deploy/nginx 
 ```
 Now, if you want to roll it back:
 ```
 $ kubectl rollout undo deploy/nginx
 ```
-This is all describe well on kubernetes.io by searching for 'deployment' and reading the overview there. 
+This is all describe well on kubernetes.io by searching for 'deployment' and reading the overview there. [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### Jobs and CronJobs
 Job vs CronJob -> A job runs a pod to a number of successful completions. Cron jobs manage jobs that run at specified intervals and/or repeatedly at a specific point in time, thus they have the 'schedule' aspect. The below demonstrates quickly creating a cronjob and then a quick edit to add a command, etc. 
@@ -233,15 +232,22 @@ spec:
           restartPolicy: OnFailure
 
 ```
+## STATE PERSISTENCE
+This is still one of my weaknesses and the whole PV creation is high dependent on the underlying cloud or file storage technique used. For now, the links provided later in the persistence tasks are best for studying this. 
+
 ### Deployments, Rollouts, Roll-Backs...
 Well described here:
 - [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
+## OBSERVABILITY
+This part of the curriculum covers the logging, debugging, and metrics of your running applications. 
+
 ### Container Metrics
-Container metrics require that heapster  
+Container metrics require that heapster be running, and it is pretty standard on clusters now. 
 ```
 $ kubectl top pod
 ```
+
 ## SERVICES and NETWORKING
 
 ### 'Exposing' Ports for PODS
@@ -266,8 +272,8 @@ By default, pods are non-isolated; they accept traffic from any source.
 
 Pods become isolated by having a NetworkPolicy that selects them. Once there is any NetworkPolicy in a namespace selecting a particular pod, that pod will reject any connections that are not allowed by any NetworkPolicy. (Other pods in the namespace that are not selected by any NetworkPolicy will continue to accept all traffic.)
 
+## MISCELANEOUS TIPS and TRICKS
 
-## Misc Tips
 ### Extracting yaml from running resource
 Use the --export and -o yaml flags to export the basic yaml from an existing resource:
 ```
@@ -288,8 +294,6 @@ metadata:
   creationTimestamp: null
   name: my-secret
 ```
-
-
 
 # TASKS from Kubernetes.io
 The following are primarily links to 'tasks' section of the kubernetes.io documentation. These are very useful to use a labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam. 
@@ -312,7 +316,6 @@ The following are primarily links to 'tasks' section of the kubernetes.io docume
 - [Tasks -> Project Volume w/Secrets](https://kubernetes.io/docs/tasks/configure-pod-container/configure-projected-volume-storage/)
 - [Tasks -> Setting Service Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
 
-
 ## Multi-Container Pods
 
 - [Tasks -> Init Containers](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/)
@@ -321,7 +324,7 @@ The following are primarily links to 'tasks' section of the kubernetes.io docume
 ## Pod Design
 
 - [Tasks -> ReplicaSet Rolling Updates](https://kubernetes.io/docs/tasks/run-application/rolling-update-replication-controller/)
-- [Deployments and Rollbacks](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment)
+- [Deployments, Rollouts, and Rollbacks Overview](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### CRON
 - [Tasks -> Automated Tasks with Cron Jobs](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/)
