@@ -181,11 +181,11 @@ spec:
 ## MULTI-CONTAINER PODS
 This particular section needs additional detail as these concepts are not covered that well via the tasks provided at kubernetes.io. Actually, the best coverage (for sidecars) is in the concepts section under logging architecture. 
 
-- One or more containers running within a pod for enhancing the main container functionality (logger container, git synchronizer container); These are sidecar container
+- One or more containers running within a pod for enhancing the main container functionality (logger container, git synchronizer container). These are called sidecar containers.
 
-- One or more containers running within a pod for accessing external applications/servers (Redis cluster, memcache cluster); These are called ambassador container
+- One or more containers running within a pod for accessing external applications/servers (Redis cluster, memcache cluster). These are called ambassador container
 
-- One or more containers running within a pod to allow access to application running within the container (Monitoring container); These are called as adapter containers- 
+- One or more containers running within a pod to allow access to application running within the container (Monitoring container). These are called adapter containers.
 
 [Concepts -> Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 
@@ -209,7 +209,7 @@ Now, if you want to roll it back:
 ```
 $ kubectl rollout undo deploy/nginx
 ```
-This is all describe well on kubernetes.io by searching for 'deployment' and reading the overview there. [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+This is all describde well on kubernetes.io by searching for 'deployment' and reading the overview there. [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### Jobs and CronJobs
 Job vs CronJob -> A job runs a pod to a number of successful completions. Cron jobs manage jobs that run at specified intervals and/or repeatedly at a specific point in time, thus they have the 'schedule' aspect. The below demonstrates quickly creating a cronjob and then a quick edit to add a command, etc. 
@@ -264,10 +264,10 @@ spec:
     name: busybox
     env:
     - name: PORT
-        value: "80"
+      value: "80"
     ports:
     - containerPort: 80
-        protocol: TCP
+      protocol: TCP
 ```
 ### Network Policies
 Resources use labels to select pods and define rules which specify what traffic is allowed to the selected pods. So, the pods themselves require certain labels / selectors to enable network policies.
@@ -276,7 +276,7 @@ By default, pods are non-isolated; they accept traffic from any source.
 
 Pods become isolated by having a NetworkPolicy that selects them. Once there is any NetworkPolicy in a namespace selecting a particular pod, that pod will reject any connections that are not allowed by any NetworkPolicy. (Other pods in the namespace that are not selected by any NetworkPolicy will continue to accept all traffic.)
 
-## MISCELANEOUS TIPS and TRICKS
+## MISCELLANEOUS TIPS and TRICKS
 
 ### Extracting yaml from running resource
 Use the --export and -o yaml flags to export the basic yaml from an existing resource:
@@ -348,7 +348,7 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 - [Tasks -> Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
 - [Tasks -> Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
 - [Tasks -> Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
-- [Tasks -> Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
+- [Tasks -> Core Metrics Pipeline](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
 
 ## Services and Networking
 
