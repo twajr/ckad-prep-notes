@@ -13,9 +13,9 @@ Version: 1.10.2
 ## Outline
 Right now there are five primary sections to this document.
 - [Overview](#overview)
-- [A Checklist of Curriculum Progress](#current-Progress)
+- [A Checklist of Curriculum Progress](#current-progress)
 - [Where to Practice?](#Where to Practice?)
-- [Detailed Review (with Tips) Ordered by Curriculum](#Detailed Review)
+- [Detailed Review (with Tips) Ordered by Curriculum](#detailed-review)
 - [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#TASKS from Kubernetes.io)
 
 # Overview
