@@ -10,19 +10,15 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 ## Current Kubernetes Version
 Version: 1.10.2
 
-To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
-
-[create an anchor](
-
 ## Outline
 Right now there are five primary sections to this document.
-- [Overview](#Overview)
-- [A Checklist of Curriculum Progress](#Current Progress)
+- [Overview](#overview)
+- [A Checklist of Curriculum Progress](#Current-Progress)
 - [Where to Practice?](#Where to Practice?)
 - [Detailed Review (with Tips) Ordered by Curriculum](#Detailed Review)
 - [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#TASKS from Kubernetes.io)
 
-# Overview
+# overview
 The exam is 100% hands on using the innovative exams (www.examslocal.com) product. The CKAD exam requires an excellent understanding of K8s along with how to efficiently use kubectl to accomplish various tasks on Kubernetes. I'm sure they use this exam approach as it pretty much precludes any form of cheating. You either know the material and can very quickly implement it or not.  
 
 You will be given a list of 'tasks' to accomplish on one of four kubernetes clusters (these are described in the official exam tips above). The exam is 'open book' but only with the content available at kubernetes.io. You will have one tab for the exam content and one additional tab for kubernetes.io. However, don't expect that you can just research questions during the exam, as there will be very little time for 'learning' a specific k8s concept at exam time. It's there to help with YAML syntax detail only, IMO.
@@ -31,7 +27,7 @@ The items in this particular repo / page describe and follow the official curric
 
 I think the best approach is to fork this repo as a starting point for your studies, and then use the markdown checklist to ensure you cover all of the expected material, etc.
 
-# Current Progress
+# Current-Progress
 The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts piece is kind of vague, but the others are defined well enough that it is easy to prepare for with a hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
 
 - [x] __Core Concepts - 13%__
