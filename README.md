@@ -16,7 +16,7 @@ Right now there are five primary sections to this document.
 - [A Checklist of Curriculum Progress](#current-progress)
 - [Where to Practice?](#where-to-practice)
 - [Detailed Review (with Tips) Ordered by Curriculum](#detailed-review)
-- [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#tasks-from-kubernetes.io)
+- [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#tasks-from-kubernetes-doc)
 
 # Overview
 The exam is 100% hands on using the innovative exams (www.examslocal.com) product. The CKAD exam requires an excellent understanding of K8s along with how to efficiently use kubectl to accomplish various tasks on Kubernetes. I'm sure they use this exam approach as it pretty much precludes any form of cheating. You either know the material and can very quickly implement it or not.  
@@ -300,7 +300,7 @@ metadata:
   creationTimestamp: null
   name: my-secret
 ```
-# TASKS from Kubernetes.io
+# Tasks from Kubernetes Doc
 The following are primarily links to either the 'concepts' or 'tasks' section of the kubernetes.io documentation. The 'task' items are very useful to use as labs. I've tied them directly to the curriculum to ensure they are appropriate study material for the exam.
 
 ## Core Concepts and Kubectl
