@@ -14,9 +14,9 @@ Version: 1.10.2
 Right now there are five primary sections to this document.
 - [Overview](#overview)
 - [A Checklist of Curriculum Progress](#current-progress)
-- [Where to Practice?](#Where to Practice?)
+- [Where to Practice?](#where-to-practice)
 - [Detailed Review (with Tips) Ordered by Curriculum](#detailed-review)
-- [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#TASKS from Kubernetes.io)
+- [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#tasks-from-kubernetes.io)
 
 # Overview
 The exam is 100% hands on using the innovative exams (www.examslocal.com) product. The CKAD exam requires an excellent understanding of K8s along with how to efficiently use kubectl to accomplish various tasks on Kubernetes. I'm sure they use this exam approach as it pretty much precludes any form of cheating. You either know the material and can very quickly implement it or not.  
@@ -59,7 +59,7 @@ The list below is based on the curriculum v1.0. Once you have mastered a section
   - [x] Understand Services
   - [x] Basic Network Policies
 
-# Where to Practice?
+# Where to Practice
 This particular items was difficult for me as I didn't have a (current) k8s cluster to use at work. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches for an inexpensive k8s environment. built many clusters using K8s The Hard way on gcloud (and AWS), built a raspberry pi cluster I could carry to work, and tried using kubeadm / kops on gcloud and aws.
 
 In my opinion, and all that is required to pass this test, is to just setup a gcloud account, and use a two-node GKE cluster for studying. Heck, you can even use the very nice google cloud shell and not even leave your browser.
