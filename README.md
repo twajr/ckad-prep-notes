@@ -349,7 +349,7 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 - [Tasks -> Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
 - [Tasks -> Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
 - [Tasks -> Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
-- [Tasks -> Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
+- [Tasks -> Core Metrics Pipeline](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
 
 ## Services and Networking
 
