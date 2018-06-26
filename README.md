@@ -344,12 +344,12 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 
 ## Observability
 - [Tasks -> App Introspection and Debugging](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application-introspection/)
-- [Tasks - Liveness and Readiness Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)
+- [Tasks - Liveness and Readiness Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)
 - [Tasks -> Debugging Pods](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/)
 - [Tasks -> Troubleshooting Applications](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/)
 - [Tasks -> Debugging Services](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/)
 - [Tasks -> Debugging Services Locally](https://kubernetes.io/docs/tasks/debug-application-cluster/local-debugging/)
-- [Tasks -> Core Metrics Pipelin](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
+- [Tasks -> Core Metrics Pipeline](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
 
 ## Services and Networking
 
