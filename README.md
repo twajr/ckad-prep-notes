@@ -329,7 +329,7 @@ The following are primarily links to either the 'concepts' or 'tasks' section of
 ## Pod Design
 - [Concepts -> Assign Pods to Nodes - Selectors](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
 - [Concepts -> Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
-- [Tasks -> ReplicaSet Rolling Updates](https://kubernetes.io/docs/tasks/run-application/rolling-update-replication-controller/)
+- [Tasks -> ReplicaSet Rolling Updates](https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 - [Concepts -> Deployments, Rollouts, and Rollbacks](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
 ### CRON
