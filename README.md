@@ -89,12 +89,12 @@ gcloud container clusters delete my-cluster
 The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. This section is best used to provide a quick overview of the curriculum along with the needed kubectl commands for a hands-on exam.
 
 ## CORE CONCEPTS
-The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important understand as well as how it is managed with kubectl. To me, this is embodied in the kubectl RUN command.
+The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important to understand as well as how they are managed with kubectl. To me, this is embodied in the kubectl RUN command.
 
 ### Using the RUN command for Pods
 The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam.
 
-The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by default the run creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
+The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by default RUN creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
 ```
 $ kubectl run nginx --image=nginx   (deployment)
 $ kubectl run nginx --image=nginx --restart=Never   (pod)
@@ -104,7 +104,7 @@ $ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailur
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource.
 
 ## CONFIGURATION
-Configuration covers how run-time data is provided to your applications executing within k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
+Configuration covers how run-time 'config' data is provided to your applications running in k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
 
 ### Config Maps / Environment Variables
 The exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic config map with a key value pair, see below.
