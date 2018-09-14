@@ -3,12 +3,11 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 
 - [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
 - [CNCF Kubernetes Curriculum Repo](https://github.com/cncf/curriculum)
-- [CNCF Official CKAD Exam Tips](https://www2.thelinuxfoundation.org/ckad-tips)
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
 - [VIM Cheatsheet - You should know VIM pretty well](https://devhints.io/vim)
 
 ## Current Kubernetes Version
-Version: 1.10.2
+Version: 1.11
 
 ## Outline
 Right now there are five primary sections to this document.
@@ -30,34 +29,34 @@ I think the best approach is to fork this repo as a starting point for your stud
 # Current Progress
 The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts piece is kind of vague, but the others are defined well enough that it is easy to prepare for with a hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
 
-- [x] __Core Concepts - 13%__
-  - [x] API Primitives
-  - [x] Create and Configure Basic Pods
+- [ ] __Core Concepts - 13%__
+  - [ ] API Primitives
+  - [ ] Create and Configure Basic Pods
 - [ ] __Configuration - 18%__
-  - [x] Understand ConfigMaps
-  - [x] Understand SecurityContexts
-  - [x] Define App Resource Requirements
+  - [ ] Understand ConfigMaps
+  - [ ] Understand SecurityContexts
+  - [ ] Define App Resource Requirements
   - [ ] Create and Consume Secrets
-  - [x] Understand Service Accounts
+  - [ ] Understand Service Accounts
 - [ ] __Multi-Container Pods - 10%__
   - [ ] Design Patterns: Ambassador, Adapter, Sidecar
     - [ ] - Sidecar Pattern
     - [ ] - Init Containers
-- [x] __Pod Design - 20%__
-  - [x] Using Labels, Selectors, and Annotations
-  - [x] Understand Deployments and Rolling Updates
-  - [x] Understand Deployment Rollbacks
-  - [x] Understand Jobs and CronJobs
+- [ ] __Pod Design - 20%__
+  - [ ] Using Labels, Selectors, and Annotations
+  - [ ] Understand Deployments and Rolling Updates
+  - [ ] Understand Deployment Rollbacks
+  - [ ] Understand Jobs and CronJobs
 - [ ] - __State Persistence - 8%__
   - [ ] - Understand PVCs for Storage
 - [ ] __Observability - 18%__
-  - [x] Liveness and Readiness Probes
-  - [x] Understand Container Logging
+  - [ ] Liveness and Readiness Probes
+  - [ ] Understand Container Logging
   - [ ] Understand Monitoring Application in Kubernetes
-  - [x] Understand Debugging in Kubernetes
-- [x] __Services and Networking - 13%__
-  - [x] Understand Services
-  - [x] Basic Network Policies
+  - [ ] Understand Debugging in Kubernetes
+- [ ] __Services and Networking - 13%__
+  - [ ] Understand Services
+  - [ ] Basic Network Policies
 
 # Where to Practice
 This particular items was difficult for me as I didn't have a (current) k8s cluster to use at work. As I was initially studying for the CKA which requires more cluster-level work, I tried many, many different approaches for an inexpensive k8s environment. built many clusters using K8s The Hard way on gcloud (and AWS), built a raspberry pi cluster I could carry to work, and tried using kubeadm / kops on gcloud and aws.
