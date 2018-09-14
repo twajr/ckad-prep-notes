@@ -2,7 +2,7 @@
 List of resources and notes for passing the Certified Kubernetes Application Developer (CKAD) exam. Official links below.
 
 - [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
-- [CNCF Kubernetes Curriculum Repo](https://github.com/cncf/curriculum)
+- [CNCF Kubernetes Curriculum Repo](https://github.com/cncf/curriculum/blob/master/certified_kubernetes_application_developer_exam_v1.0.pdf)
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
 - [VIM Cheatsheet - You should know VIM pretty well](https://devhints.io/vim)
 
