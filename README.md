@@ -12,6 +12,10 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 ## Current Kubernetes Version
 Version: 1.10.2
 
+## Importand VI Tips
+
+  - 'dG' - Deletes contents from cursor to end of file. This is very usefule when editing YAML files.
+
 ## Outline
 Right now there are five primary sections to this document.
 - [Overview](#overview)
