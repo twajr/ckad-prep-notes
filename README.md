@@ -14,7 +14,7 @@ Version: 1.10.2
 
 ## Importand VI Tips
 
-  - 'dG' - Deletes contents from cursor to end of file. This is very usefule when editing YAML files.
+  - 'dG' - Deletes contents from cursor to end of file. This is very useful when editing YAML files.
 
 ## Outline
 Right now there are five primary sections to this document.
