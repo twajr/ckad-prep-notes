@@ -1,7 +1,7 @@
 # ckad-prep-notes
 List of resources and notes for passing the Certified Kubernetes Application Developer (CKAD) exam. Official links below.
 
-I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. See link below. Once complete, I'll add my slides and other material here. 
+I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. See link below. Once complete, I'll add my slides and other material here.
 
 - [Passing the CKAD and CKA Exams](https://www.devopsdays.org/events/2018-kansas-city/speakers/tom-armstrong/)
 - [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
@@ -14,7 +14,7 @@ I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. 
 
 
 ## Current Kubernetes Version
-Version: 1.10.2
+Version: 1.10.7
 
 ## Importand vi Tips
 
@@ -79,22 +79,26 @@ Here are commands used to create a two-node cluster for studying. I keep these h
 ```
 gcloud config set compute/zone us-central1-a
 gcloud config set compute/region us-central1
-gcloud container clusters create my-cluster --cluster-version=1.10.2-gke.3 \
+gcloud container clusters create my-cluster --cluster-version=1.10.7-gke.6 \
      --image-type=ubuntu --num-nodes=2
 ```
 The result:
 ```
 NAME        LOCATION       MASTER_VERSION  MASTER_IP     MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-my-cluster  us-central1-a  1.10.2-gke.3    35.232.253.6  n1-standard-1  1.10.2-gke.3  2          RUNNING
+my-cluster  us-central1-a  1.10.7-gke.6    35.232.253.6  n1-standard-1  1.10.7-gke.6  2          RUNNING
 
 cloudshell:~$ kubectl get nodes
 NAME                                        STATUS    ROLES     AGE       VERSION
-gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       v1.10.2-gke.3
-gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       v1.10.2-gke.3
+gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       1.10.7-gke.6
+gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       1.10.7-gke.6
 ```
 No need to keep the cluster around when not studying, so:
 ```
 gcloud container clusters delete my-cluster
+```
+## To Get Current GKE Kubernetes Versions
+```
+  gcloud container get-server-config
 ```
 # Detailed Review
 The exam is about speed and efficiency. If you spend very much time looking at documentation, you will have zero chance of completing the many questions. With that said, the following will help with time management. I've aligned the tips to follow the curriculum. This section is best used to provide a quick overview of the curriculum along with the needed kubectl commands for a hands-on exam.
@@ -102,7 +106,7 @@ The exam is about speed and efficiency. If you spend very much time looking at d
 ## CORE CONCEPTS
 The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important to understand as well as how they are managed with kubectl. To me, this is embodied in the kubectl RUN command.
 
-### Using the RUN command for Pods
+### Using the RUN command for Pods, Deployments, etc.
 The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam.
 
 The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by default RUN creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
@@ -114,6 +118,37 @@ $ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailur
 ```
 The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource.
 
+The above is helpful in the exam as speed is important. If the question indicates to 'create a pod', use the quick syntax to get a pod going.
+```
+$ kubcel run nginx --image=busybox --restart=Never
+pod "busybox" created
+```
+If we leave off the --restart flag, we get a deployment with replica set and all.
+```
+$ kubectl run nginx --image=nginx
+deployment.apps "nginx" created
+$ kubectl get deployment nginx
+NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx     1         1         1            1           8s
+```
+Oh, you just want a job to run, change the restart flag:
+```
+$ kubectl run busybox --image=busybox --restart=OnFailure
+job.batch "busybox" created
+$ kubectl get jobs
+NAME      DESIRED   SUCCESSFUL   AGE
+busybox   1         1            9s
+```
+And finally, we want a CRON-based job, add the schedule flag:
+```
+$ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure
+cronjob.batch "busybox" created
+$ kubectl get cronjobs
+NAME      SCHEDULE    SUSPEND   ACTIVE    LAST SCHEDULE   AGE
+busybox   * * * * *   False     0         <none>          20s
+```
+The point here is that one or two flags will create a different resource type, and quickly. Very useful when speed is necessary.
+
 ## CONFIGURATION
 Configuration covers how run-time 'config' data is provided to your applications running in k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
 
@@ -121,6 +156,7 @@ Configuration covers how run-time 'config' data is provided to your applications
 The exam is about application development and its support within Kubernetes. With that said, high on the list of objectives is setting up config options and secrets for your applications. To create the most basic config map with a key value pair, see below.
 ```
 $ kubectl create configmap app-config --from-literal=key123=value123
+configmap "app-config" created
 ```
 There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below.
 ```
