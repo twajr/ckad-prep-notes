@@ -244,18 +244,28 @@ The Pod design section mostly covers deployments, rolling updates, and rollbacks
 Below is a quick example of creating a deployment and then updating its image. This will force a rolling deployment to start. You can then roll it back.
 ```
 $ kubectl run nginx --image=nginx  --replicas=3
+deployment.apps "nginx" created
 ```
 Okay, not force a rolling update by updating its image.
 ```
 $ kubectl set image deploy/nginx nginx=nginx:1.9.1
+deployment.apps "nginx" image updated
 ```
 Now you can check the status of the roll out.
 ```
 $ kubectl rollout status deploy/nginx
+Waiting for rollout to finish: 2 out of 3 new replicas have been updated...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 2 of 3 updated replicas are available...
+deployment "nginx" successfully rolled out
 ```
 Now, if you want to roll it back:
 ```
 $ kubectl rollout undo deploy/nginx
+$ kubectl rollout status deploy/nginx
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 2 of 3 updated replicas are available...
+deployment "nginx" successfully rolled out
 ```
 This is all describe well on kubernetes.io by searching for 'deployment' and reading the overview there. [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
@@ -280,7 +290,10 @@ spec:
             name: crontest
             command: ["date; echo Hello"]
           restartPolicy: OnFailure
-
+```
+You can also redirect (> cron.yaml) the above to a file, edit it to add the container command, and then create the cronjob with the kubectl create:
+```
+$ kubectl create -f cron.yaml
 ```
 ## STATE PERSISTENCE
 This is still one of my weaknesses and the whole PV creation is high dependent on the underlying cloud or file storage technique used. For now, the links provided later in the persistence tasks are best for studying this.
