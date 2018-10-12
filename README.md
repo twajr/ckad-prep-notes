@@ -10,6 +10,7 @@ I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. 
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
 - [VIM Cheatsheet - You should know VIM pretty well](https://devhints.io/vim)
 - [Excellent CKAD Exercises to complement this guide](https://github.com/dgkanatsios/CKAD-exercises)
+- [TMUX Cheat Sheet - TMUX is useful, especially for CKA](https://gist.github.com/MohamedAlaa/2961058)
 
 
 ## Current Kubernetes Version
