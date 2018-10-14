@@ -94,6 +94,12 @@ NAME                                        STATUS    ROLES     AGE       VERSIO
 gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       1.10.7-gke.6
 gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       1.10.7-gke.6
 ```
+## Setting kubectl Credentials
+If using the cloud shell, you'll sometimes need to authorize kubectl to connect to your cluster instance.
+```
+gcloud container clusters get-credentials my-cluster
+```
+## Deleting Your Cluster
 No need to keep the cluster around when not studying, so:
 ```
 gcloud container clusters delete my-cluster
@@ -122,7 +128,7 @@ The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job re
 
 The above is helpful in the exam as speed is important. If the question indicates to 'create a pod', use the quick syntax to get a pod going.
 ```
-$ kubcel run nginx --image=busybox --restart=Never
+$ kubectl run nginx --image=busybox --restart=Never
 pod "busybox" created
 ```
 If we leave off the --restart flag, we get a deployment with replica set and all.
