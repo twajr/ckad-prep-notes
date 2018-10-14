@@ -75,6 +75,8 @@ This particular items was difficult for me as I didn't have a (current) k8s clus
 
 In my opinion, and all that is required to pass this test, is to just setup a gcloud account, and use a two-node GKE cluster for studying. Heck, you can even use the very nice google cloud shell and not even leave your browser.
 
+[gcloud command line (SDK) documentation](https://cloud.google.com/sdk/)
+
 Here are commands used to create a two-node cluster for studying. I keep these here just so I can fire up and destroy a cluster for a few hours each day for study. Notice that you can tailor the cluster version to match the k8s version for the exam.
 ```
 gcloud config set compute/zone us-central1-a
