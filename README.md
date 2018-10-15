@@ -16,10 +16,16 @@ I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. 
 ## Current Kubernetes Version
 Version: 1.10.7
 
-## Importand vi Tips
+## Important vi Tips
 
   - 'dG' - Deletes contents from cursor to end of file. This is very useful when editing YAML files.
   - 'ZZ' - Save and exit quickly.
+
+## kubectl Tips
+To set nano as your editor for 'kubectl edit'
+```
+export KUBECTL_EDITOR="nano"
+```
 
 ## Outline
 Right now there are five primary sections to this document.
@@ -225,9 +231,11 @@ spec:
     image: polinux/stress
     resources:
       limits:
-        memory: "200Mi"
+        memory: 200Mi
+        cpu: 200m
       requests:
-        memory: "100Mi"
+        memory: 100Mi
+        cpu: 100m
 ```
 ### Secrets
 To quickly generate secrets, use the --from-literal flag like this:
