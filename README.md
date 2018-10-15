@@ -166,15 +166,36 @@ The exam is about application development and its support within Kubernetes. Wit
 $ kubectl create configmap app-config --from-literal=key123=value123
 configmap "app-config" created
 ```
-There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below.
+There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below. This would be for a simple nginx container. 
 ```
 spec:
   containers:
-  - envFrom:              (create env variables for each key in config map)
-    - configMapRef:
-        name: app-config  (name of your config map)
-    image: nginx
+  - image: nginx
     name: nginx
+    envFrom:
+    - configMapRef:
+        name: app-config
+```
+Here is another way to map a specific value to a specific environment variable value. 
+```
+  containers:
+  - image: nginx
+    name: nginx
+    env:
+      - name: SPECIAL_APP_KEY
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: key123
+```
+Now to verify it worked. 
+```
+$ kubectl exec -it nginx /bin/bash
+root@nginx:/# env
+HOSTNAME=nginx
+SPECIAL_APP_KEY=value123
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+...
 ```
 ### Security Contexts
 Security contexts can be applied at either the pod or container level. Of course pod-level contexts apply to all containers within that pod. There are several ways of defining privileges and access controls with these contexts.
