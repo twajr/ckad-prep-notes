@@ -237,6 +237,23 @@ spec:
         memory: 100Mi
         cpu: 100m
 ```
+Now to verify:
+```
+$ kubectl describe po stress
+Name:         stress
+Namespace:    default
+Labels:       run=stress
+IP:           10.36.1.17
+Containers:
+  stress:
+  Image:          polinux/stress
+  Limits:
+      cpu:     200m
+      memory:  200Mi
+    Requests:
+      cpu:        100m
+      memory:     100Mi
+```
 ### Secrets
 To quickly generate secrets, use the --from-literal flag like this:
 ```
@@ -251,6 +268,47 @@ kind: Secret
 metadata:
   creationTimestamp: null
   name: my-secret
+```
+Now create the secret:
+```
+$ kubectl create -f my-secret.yaml
+secret "my-secret" created
+```
+Now have a look at it:
+```
+ kubectl get secret my-secret -o yaml
+apiVersion: v1
+data:
+  foo: YmFy
+kind: Secret
+metadata:
+  name: my-secret
+  namespace: default
+  uid: bae5b8d8-d01a-11e8-8972-42010a800002
+type: Opaque
+```
+Decode it:
+```
+$ echo "YmFy" | base64 --decode
+bar
+```
+Secrets can be mounted as data volumes or be exposed as environment variables to be used by a container in a pod. Here we'll mount our above secret as a volume.
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secrets-test-pod
+spec:
+  containers:
+  - image: nginx
+    name: test-container
+    volumeMounts:
+    - mountPath: /etc/secret/volume
+      name: secret-volume
+  volumes:
+  - name: secret-volume
+    secret:
+      secretName: my-secret
 ```
 ### Service Accounts
 When pods are created by K8s they are provided an identify via the service account. In most cases, pods use the default service account, but it can be specified directly.
@@ -283,7 +341,7 @@ Below is a quick example of creating a deployment and then updating its image. T
 $ kubectl run nginx --image=nginx  --replicas=3
 deployment.apps "nginx" created
 ```
-Okay, not force a rolling update by updating its image.
+Okay, now force a rolling update by updating its image.
 ```
 $ kubectl set image deploy/nginx nginx=nginx:1.9.1
 deployment.apps "nginx" image updated
