@@ -30,11 +30,30 @@ export KUBECTL_EDITOR="nano"
 ## Outline
 Right now there are five primary sections to this document.
 - [Overview](#overview)
+- [General Exam Tips](#tips)
 - [A Checklist of Curriculum Progress](#current-progress)
 - [Where to Practice?](#where-to-practice)
 - [Detailed Review (with Tips) Ordered by Curriculum](#detailed-review)
 - [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#tasks-from-kubernetes-doc)
 
+# Tips
+Okay, this section is new and contains some general pointers to help pass the exam. 
+
+First, as discussed later, the exam is primarily about speed. With that in mind, the best way to approach the moderate to complex questions is to generate the initial YAML via the dry run flag. Then, edit the file with either vi or nano, and then create the required resource. The steps are outlined below. 
+```
+$ kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml > mypod.yaml
+$ nano mypod.yaml
+$ kubectl create -f mypod.yaml
+pod "nginx" created
+```
+There you go. If you're not satisfied with the results. Delete the resource, re-edit the declaritive yaml file, and redo. 
+```
+$ kubectl delete -f mypod.yaml
+pod "nginx" deleted
+$ nano mypod.yaml
+$ kubectl create -f mypod.yaml
+pod "nginx" created
+```
 # Overview
 The exam is 100% hands on using the innovative exams (www.examslocal.com) product. The CKAD exam requires an excellent understanding of K8s along with how to efficiently use kubectl to accomplish various tasks on Kubernetes. I'm sure they use this exam approach as it pretty much precludes any form of cheating. You either know the material and can very quickly implement it or not.  
 
