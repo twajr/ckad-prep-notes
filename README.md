@@ -29,24 +29,24 @@ export KUBECTL_EDITOR="nano"
 
 ## Outline
 Right now there are five primary sections to this document.
-- [Overview](#overview)
 - [General Exam Tips](#tips)
+- [Overview](#overview)
 - [A Checklist of Curriculum Progress](#current-progress)
 - [Where to Practice?](#where-to-practice)
 - [Detailed Review (with Tips) Ordered by Curriculum](#detailed-review)
 - [List of Resources Ordered by Curriculum (mostly K8s.io) for Study](#tasks-from-kubernetes-doc)
 
 # Tips
-Okay, this section is new and contains some general pointers to help pass the exam. 
+Okay, this section is new and contains some general pointers to help pass the exam.
 
-First, as discussed later, the exam is primarily about speed. With that in mind, the best way to approach the moderate to complex questions is to generate the initial YAML via the dry run flag. Then, edit the file with either vi or nano, and then create the required resource. The steps are outlined below. 
+First, as discussed later, the exam is primarily about speed. With that in mind, the best way to approach the moderate to complex questions is to generate the initial YAML via the dry run flag. Then, edit the file with either vi or nano, and then create the required resource. The steps are outlined below.
 ```
 $ kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml > mypod.yaml
 $ nano mypod.yaml
 $ kubectl create -f mypod.yaml
 pod "nginx" created
 ```
-There you go. If you're not satisfied with the results. Delete the resource, re-edit the declaritive yaml file, and redo. 
+There you go. If you're not satisfied with the results. Delete the resource, re-edit the declaritive yaml file, and redo.
 ```
 $ kubectl delete -f mypod.yaml
 pod "nginx" deleted
@@ -191,7 +191,7 @@ The exam is about application development and its support within Kubernetes. Wit
 $ kubectl create configmap app-config --from-literal=key123=value123
 configmap "app-config" created
 ```
-There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below. This would be for a simple nginx container. 
+There are many ways to map config map items to environment variables within a container process. One quick, but tricky (syntax) option is shown below. This would be for a simple nginx container.
 ```
 spec:
   containers:
@@ -201,7 +201,7 @@ spec:
     - configMapRef:
         name: app-config
 ```
-Here is another way to map a specific value to a specific environment variable value. 
+Here is another way to map a specific value to a specific environment variable value.
 ```
   containers:
   - image: nginx
@@ -213,7 +213,7 @@ Here is another way to map a specific value to a specific environment variable v
             name: app-config
             key: key123
 ```
-Now to verify it worked. 
+Now to verify it worked.
 ```
 $ kubectl exec -it nginx /bin/bash
 root@nginx:/# env
