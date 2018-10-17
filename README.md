@@ -153,8 +153,8 @@ The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job re
 
 The above is helpful in the exam as speed is important. If the question indicates to 'create a pod', use the quick syntax to get a pod going.
 ```
-$ kubectl run nginx --image=busybox --restart=Never
-pod "busybox" created
+$ kubectl run nginx --image=nginx --restart=Never
+pod "nginx" created
 ```
 If we leave off the --restart flag, we get a deployment with replica set and all.
 ```
