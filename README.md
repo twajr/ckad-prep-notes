@@ -24,7 +24,7 @@ Version: 1.10.7
 ## kubectl Tips
 To set nano as your editor for 'kubectl edit'
 ```
-export KUBECTL_EDITOR="nano"
+export KUBE_EDITOR="nano"
 ```
 
 ## Outline
