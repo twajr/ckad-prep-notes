@@ -13,8 +13,8 @@ I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. 
 - [TMUX Cheat Sheet - TMUX is useful, especially for CKA](https://gist.github.com/MohamedAlaa/2961058)
 
 
-## Current Kubernetes Version
-Version: 1.10.7
+## Current Kubernetes Version (EXAM)
+Version: 1.11.1
 
 ## Important vi Tips
 
@@ -106,18 +106,18 @@ Here are commands used to create a two-node cluster for studying. I keep these h
 ```
 gcloud config set compute/zone us-central1-a
 gcloud config set compute/region us-central1
-gcloud container clusters create my-cluster --cluster-version=1.10.7-gke.6 \
+gcloud container clusters create my-cluster --cluster-version=1.11.7-gke.12 \
      --image-type=ubuntu --num-nodes=2
 ```
 The result:
 ```
 NAME        LOCATION       MASTER_VERSION  MASTER_IP     MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-my-cluster  us-central1-a  1.10.7-gke.6    35.232.253.6  n1-standard-1  1.10.7-gke.6  2          RUNNING
+my-cluster  us-central1-a  1.10.7-gke.6    35.232.253.6  n1-standard-1  1.11.7-gke.12  2          RUNNING
 
 cloudshell:~$ kubectl get nodes
 NAME                                        STATUS    ROLES     AGE       VERSION
-gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       1.10.7-gke.6
-gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       1.10.7-gke.6
+gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       1.11.7-gke.12
+gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       1.11.7-gke.12
 ```
 ## Setting kubectl Credentials
 If using the cloud shell, you'll sometimes need to authorize kubectl to connect to your cluster instance.
