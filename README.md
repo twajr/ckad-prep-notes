@@ -67,6 +67,7 @@ I think the best approach is to fork this repo as a starting point for your stud
 The list below is based on the curriculum v1.0. Once you have mastered a section, check it off and move on to the next. You need to understand them ALL very well. The Core Concepts piece is kind of vague, but the others are defined well enough that it is easy to prepare for with a hands-on work through the tasks offered at kubernetes.io. The rest of this document follows this same outline of curriculum.
 
 !!!!!
+!!!
 
 - [x] __Core Concepts - 13%__
   - [x] API Primitives
