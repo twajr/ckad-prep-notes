@@ -140,47 +140,17 @@ The exam is about speed and efficiency. If you spend very much time looking at d
 The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important to understand as well as how they are managed with kubectl. To me, this is embodied in the kubectl RUN command.
 
 ### Using the RUN command for Pods, Deployments, etc.
-The RUN command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam.
+The `run` command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam.
 
-The specific, underlying resource created from a particular RUN command is based on its 'generator'. For example, by default RUN creates a deployment. However, it can also create a POD, or JOB, or CRONJOB, based on various flags, in particular the ---restart flag. This is handy.
+The specific, underlying resource created from a particular `create`/`run` command is based on its 'generator'.
 ```
-$ kubectl run nginx --image=nginx   (deployment)
-$ kubectl run nginx --image=nginx --restart=Never   (pod)
-$ kubectl run busybox --image=busybox --restart=OnFailure   (job)
-$ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure (cronJob)
+$ kubectl create deployment nginx --image=nginx  #deployment
+$ kubectl run nginx --image=nginx --restart=Never  #pod
+$ kubectl create job nginx --image=nginx  #job
+$ kubectl create cronjob nginx --image=nginx --schedule="* * * * *"  #cronJob
 ```
-The --schedule flag creates a Cron Job, and --restart=OnFailure creates a Job resource.
 
 The above is helpful in the exam as speed is important. If the question indicates to 'create a pod', use the quick syntax to get a pod going.
-```
-$ kubectl run nginx --image=nginx --restart=Never
-pod "nginx" created
-```
-If we leave off the --restart flag, we get a deployment with replica set and all.
-```
-$ kubectl run nginx --image=nginx
-deployment.apps "nginx" created
-$ kubectl get deployment nginx
-NAME      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-nginx     1         1         1            1           8s
-```
-Oh, you just want a job to run, change the restart flag:
-```
-$ kubectl run busybox --image=busybox --restart=OnFailure
-job.batch "busybox" created
-$ kubectl get jobs
-NAME      DESIRED   SUCCESSFUL   AGE
-busybox   1         1            9s
-```
-And finally, we want a CRON-based job, add the schedule flag:
-```
-$ kubectl run busybox --image=busybox --schedule="* * * * *"  --restart=OnFailure
-cronjob.batch "busybox" created
-$ kubectl get cronjobs
-NAME      SCHEDULE    SUSPEND   ACTIVE    LAST SCHEDULE   AGE
-busybox   * * * * *   False     0         <none>          20s
-```
-The point here is that one or two flags will create a different resource type, and quickly. Very useful when speed is necessary.
 
 ## CONFIGURATION
 Configuration covers how run-time 'config' data is provided to your applications running in k8s. This includes environment variables, config maps, secrets, etc. Other items that are pertinent to config are the service account and security contexts used to execute the containers. The below items are covered by this part of the curriculum.
