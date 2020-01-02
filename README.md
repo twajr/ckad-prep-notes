@@ -139,8 +139,8 @@ The exam is about speed and efficiency. If you spend very much time looking at d
 ## CORE CONCEPTS
 The core concepts section covers the core K8s API and its primitives and resources. It also covers the important concept of a POD. This is the basic unit of deployment for app developers and so this 'POD' concept is important to understand as well as how they are managed with kubectl. To me, this is embodied in the kubectl RUN command.
 
-### Using the RUN command for Pods, Deployments, etc.
-The `run` command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam.
+### Using the RUN/CREATE command for Pods, Deployments, etc.
+The `run` command allows quick creation of the various high-level execution resources in k8s, and provides speed, which we need for the exam. (NOTE: The use of run to handle various resource creations was updated to instead use the create command as of 1.14)
 
 The specific, underlying resource created from a particular `create`/`run` command is based on its 'generator'.
 ```
