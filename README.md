@@ -1,9 +1,6 @@
 # ckad-prep-notes
 List of resources and notes for passing the Certified Kubernetes Application Developer (CKAD) exam. Official links below.
 
-I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. See link below. Once complete, I'll add my slides and other material here.
-
-- [Passing the CKAD and CKA Exams](https://www.devopsdays.org/events/2018-kansas-city/speakers/tom-armstrong/)
 - [CNCF Official CKAD Main](https://www.cncf.io/certification/ckad/)
 - [CNCF Kubernetes Curriculum Repo](https://github.com/cncf/curriculum)
 - [CNCF Official CKAD Exam Tips](https://www2.thelinuxfoundation.org/ckad-tips)
@@ -14,7 +11,7 @@ I'm giving a 90 minute presentation on passing the CKAD and CKA in Kansas City. 
 
 
 ## Current Kubernetes Version (EXAM)
-Version: 1.11.1
+Version: 1.14
 
 ## Important vi Tips
 
