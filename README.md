@@ -108,12 +108,12 @@ gcloud container clusters create my-cluster --cluster-version=1.15.8-gke.2 --ima
 The result:
 ```
 NAME        LOCATION       MASTER_VERSION  MASTER_IP     MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-my-cluster  us-central1-a  1.10.7-gke.6    35.232.253.6  n1-standard-1  1.11.7-gke.12  2          RUNNING
+my-cluster  us-central1-a  v1.15.8-gke.2   35.232.253.6  n1-standard-1  v1.15.8-gke.2  2          RUNNING
 
 cloudshell:~$ kubectl get nodes
 NAME                                        STATUS    ROLES     AGE       VERSION
-gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       1.11.7-gke.12
-gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       1.11.7-gke.12
+gke-my-cluster-default-pool-5f731fab-9d6n   Ready     <none>    44s       v1.15.8-gke.2
+gke-my-cluster-default-pool-5f731fab-llrb   Ready     <none>    41s       v1.15.8-gke.2
 ```
 ## Setting kubectl Credentials
 If using the cloud shell, you'll sometimes need to authorize kubectl to connect to your cluster instance.
