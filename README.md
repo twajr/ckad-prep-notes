@@ -7,6 +7,7 @@ List of resources and notes for passing the Certified Kubernetes Application Dev
 - [CNCF Official CKAD Candidate Handbook](https://www.cncf.io/certification/candidate-handbook)
 - [VIM Cheatsheet - You should know VIM pretty well](https://devhints.io/vim)
 - [Excellent CKAD Exercises to complement this guide](https://github.com/dgkanatsios/CKAD-exercises)
+- [More CKAD Practice Questions](https://dev.to/liptanbiswas/ckad-practice-questions-4mpn)
 - [TMUX Cheat Sheet - TMUX is useful, especially for CKA](https://gist.github.com/MohamedAlaa/2961058)
 
 
